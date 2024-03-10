@@ -31,4 +31,31 @@ const insertData = (data) => {
   });
 };
 
-export { initDatabase, insertData };
+const queryDataFromDatabase = () => {
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        'SELECT * FROM accelerometer_data;',
+        [],
+        (_, { rows }) => resolve(rows._array), // Resolve with the retrieved data
+        (_, error) => reject(error) // Reject with the error if any
+      );
+    });
+  });
+};
+
+const clearDatabase = () => {
+  db.transaction((tx) => {
+    tx.executeSql(
+      'DELETE FROM accelerometer_data;',
+      [],
+      () => {
+        console.log('Database cleared successfully');
+        // You can also add additional logic here if needed
+      },
+      (_, error) => console.error('Error clearing database', error)
+    );
+  });
+};
+
+export { initDatabase, insertData, queryDataFromDatabase,clearDatabase };

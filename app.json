@@ -14,14 +14,21 @@
     "assetBundlePatterns": [
       "**/*"
     ],
+    "permissions": [
+      "WRITE_EXTERNAL_STORAGE"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "permissions": [
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": ["WRITE_EXTERNAL_STORAGE"]
     },
     "web": {
       "favicon": "./assets/favicon.png"

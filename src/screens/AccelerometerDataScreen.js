@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Button } from 'react-native';
 import * as SQLite from 'expo-sqlite';
+import { exportDataToCSV } from '../services/CSVService'; // Import the CSV export function
 
 const db = SQLite.openDatabase('accelerometer.db');
 
@@ -36,9 +37,14 @@ const AccelerometerDataScreen = () => {
     });
   };
 
+  const exportToCSV = () => {
+    exportDataToCSV(); // Call the export function when exporting to CSV is triggered
+  };
+
   return (
     <ScrollView>
       <View>
+        <Button title="Export to CSV" onPress={exportToCSV} /> 
         <Button title="Clear Database" onPress={clearDatabase} />
         {accelerometerData.map((data, index) => (
           <View key={index}>
