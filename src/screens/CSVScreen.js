@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Button } from 'react-native';
+import { View, Text, ScrollView, Button , StyleSheet} from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import Papa from 'papaparse';
+
 
 const ReadCSVScreen = () => {
   const [csvData, setCSVData] = useState([]);
@@ -39,7 +40,7 @@ const ReadCSVScreen = () => {
   return (
     <ScrollView>
     <View>
-    <Button title="Clear CSV Data" onPress={clearCSV} />
+    <Button title="Clear CSV Data" onPress={clearCSV} style={styles.button} />
       {csvData.map((row, index) => (
         <View key={index}>
           <Text>X: {row.X}, Y: {row.Y}, Z: {row.Z}, Timestamp: {row.Timestamp}</Text>
@@ -49,5 +50,25 @@ const ReadCSVScreen = () => {
     </ScrollView>
   );
 };
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  button: {
+    marginBottom: 10,
+  },
+  rowContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    paddingVertical: 10,
+  },
+  rowText: {
+    fontSize: 16,
+  },
+});
 
 export default ReadCSVScreen;

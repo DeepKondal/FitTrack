@@ -1,12 +1,11 @@
 import { Accelerometer } from 'expo-sensors';
 
 export const startAccelerometer = (callback) => {
-  const options = {
-    intervalMs: 1000, 
-  };
   const subscription = Accelerometer.addListener((data) => {
-    callback(data);
-  }, options);
+    setTimeout(() => {
+      callback(data);
+    }, 500); // Add a delay of 500 milliseconds
+  });
 
   return subscription;
 };

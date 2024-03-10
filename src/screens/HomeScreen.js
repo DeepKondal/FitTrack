@@ -1,8 +1,7 @@
 import React from "react";
-import { Text, StyleSheet, View, Button } from "react-native";
-import AccelerometerDataScreen from "./AccelerometerDataScreen";
+import { Text, StyleSheet, View } from "react-native";
+import { Button } from "react-native-paper";
 import { useNavigation } from '@react-navigation/native';
-
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -16,24 +15,46 @@ const HomeScreen = () => {
  };
 
  const goToAccelerometerDatabase = () => {
-  navigation.navigate('AccelerometerDatabase');
+  navigation.navigate('AccelerometerData');
+ };
+
+ const goToAboutUs = () => {
+  navigation.navigate('AboutUs');
  };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.text}>Fit-Track app</Text>
-      <Button title="Read CSV" onPress={goToReadCSVScreen} />
-      <Button title="Start collecting Data" onPress={goToCollectedData} />
-      <Button title="Go to Database" onPress={goToAccelerometerDatabase}/>
-      
+      <Button mode="contained" style={styles.button} onPress={goToReadCSVScreen}>
+        Recorded Values
+      </Button>
+      <Button mode="contained" style={styles.button} onPress={goToCollectedData}>
+        Collect Acc. Data
+      </Button>
+      <Button mode="contained" style={styles.button} onPress={goToAccelerometerDatabase}>
+        Check Database
+      </Button>
+      <Button mode="contained" style={styles.button} onPress={goToAboutUs}>
+        About Us
+      </Button>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff", // Set background color to white
+  },
   text: {
     fontSize: 40,
-    textAlign:'center'
+    marginBottom: 20, // Add some spacing below the text
+  },
+  button: {
+    marginVertical: 10, // Add vertical margin between buttons
+    width: 200, // Set a fixed width for the buttons
   },
 });
 
