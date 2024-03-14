@@ -1,15 +1,19 @@
 import { useState, useEffect } from 'react';
 import { initDatabase, insertData } from './DatabaseService';
-import { startAccelerometer, stopAccelerometer } from './AccelerometerService'; // Import the accelerometer functions
+import { startAccelerometer, stopAccelerometer } from './AccelerometerService';
+
+
+
 
 const DataCollection = () => {
   const [accelerometerData, setAccelerometerData] = useState(null);
+
 
   useEffect(() => {
     // Initialize the database when the component mounts
     initDatabase();
 
-    // Start collecting accelerometer data
+    // Start collecting accelerometer data with a delay of 500 milliseconds
     const subscription = startAccelerometer((data) => {
       // Callback function to receive accelerometer data
       // Update the accelerometer data state
@@ -25,7 +29,7 @@ const DataCollection = () => {
     };
   }, []);
 
-  return accelerometerData; // Return the accelerometer data obtained from the subscription
+  return accelerometerData;
 };
 
 export default DataCollection;

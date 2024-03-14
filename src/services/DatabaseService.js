@@ -1,6 +1,8 @@
 // DatabaseService.js
 import * as SQLite from 'expo-sqlite';
 
+;
+
 const db = SQLite.openDatabase('accelerometer.db');
 
 const initDatabase = () => {
@@ -14,22 +16,26 @@ const initDatabase = () => {
   });
 };
 
+// DatabaseService.js
+// ...
+
 const insertData = (data) => {
-  
-  const { x, y, z, timestamp =Date.now() } = data;
-  db.transaction(tx => {
-    tx.executeSql(
-      'INSERT INTO accelerometer_data (x, y, z, timestamp) VALUES (?, ?, ?, ?)',
-      [x, y, z, timestamp],
-      (_, { rowsAffected }) => {
-        console.log(`Inserted ${rowsAffected} rows`);
-      },
-      (_, error) => {
-        console.error('Error inserting data:', error);
-      }
-    );
-  });
+  const { x, y, z, timestamp = Date.now() } = data;
+    db.transaction(tx => {
+      tx.executeSql(
+        'INSERT INTO accelerometer_data (x, y, z, timestamp) VALUES (?, ?, ?, ?)',
+        [x, y, z, timestamp],
+        (_, { rowsAffected }) => {
+          console.log(`Inserted ${rowsAffected} rows`);
+        },
+        (_, error) => {
+          console.error('Error inserting data:', error);
+        }
+      );
+    });
 };
+
+// ...
 
 const queryDataFromDatabase = () => {
   return new Promise((resolve, reject) => {

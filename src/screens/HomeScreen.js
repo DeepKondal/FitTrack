@@ -2,6 +2,20 @@ import React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { Button } from "react-native-paper";
 import { useNavigation } from '@react-navigation/native';
+import { sendCSVDataToServer } from "../services/CSVService"; // Import the function
+
+// Inside your component or screen
+const sendDataToServer = async () => {
+  try {
+    // Call the function to send CSV data to the server
+    await sendCSVDataToServer();
+    console.log('CSV data sent successfully.');
+    // Optionally, you can perform additional actions after sending the data
+  } catch (error) {
+    console.error('Error sending CSV data:', error);
+    // Handle errors if any
+  }
+};
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -18,8 +32,16 @@ const HomeScreen = () => {
   navigation.navigate('AccelerometerData');
  };
 
+ const goToTimeSeriesDataScreen = () => {
+  navigation.navigate('TimeSeriesData');
+};
+
  const goToAboutUs = () => {
   navigation.navigate('AboutUs');
+ };
+
+ const goToPreProcess = () => {
+  navigation.navigate('PreProcess')
  };
 
   return (
@@ -34,8 +56,17 @@ const HomeScreen = () => {
       <Button mode="contained" style={styles.button} onPress={goToAccelerometerDatabase}>
         Check Database
       </Button>
+      <Button mode="contained" style={styles.button} onPress={goToTimeSeriesDataScreen}>
+        Time Series Data
+      </Button>
+      <Button mode="contained" style={styles.button} onPress={goToPreProcess}>
+        PreProcess
+      </Button>
       <Button mode="contained" style={styles.button} onPress={goToAboutUs}>
         About Us
+      </Button>
+      <Button mode="contained" style={styles.button} onPress={sendDataToServer} >
+        Send to server
       </Button>
     </View>
   );
